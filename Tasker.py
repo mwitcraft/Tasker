@@ -13,17 +13,35 @@ tasks = []
 with open('outfile', 'rb') as fp:
     tasks = pickle.load(fp)
 
-# If program is just run, list the tasks
+
+# If no command is supplied
 if len(sys.argv) == 1:
     for task in tasks:
         print("\t" + task.name + " \t\t" + task.dueDate)
-# If program is run with add as 2nd argument, add that task
-elif sys.argv[1] == "add":
-    curTask = Task(sys.argv[2], sys.argv[3])
-    tasks.append(curTask)
-else:
-    print("Unsupported for now")
 
-# Write array to file    
-with open('outfile', 'wb') as fp:
-    pickle.dump(tasks, fp)
+# Command must be first string after starting program
+command = sys.argv[1]
+args = sys.argv[2:]
+
+if command == "add":
+    task = ''
+    for arg in args:
+        if(arg == "-d"):
+            break
+        task += " " + arg
+    print(task)
+
+# If program is just run, list the tasks
+# if len(sys.argv) == 1:
+#     for task in tasks:
+#         print("\t" + task.name + " \t\t" + task.dueDate)
+# # If program is run with add as 2nd argument, add that task
+# elif sys.argv[1] == "add":
+#     curTask = Task(sys.argv[2], sys.argv[3])
+#     tasks.append(curTask)
+# else:
+#     print("Unsupported for now")
+#
+# # Write array to file
+# with open('outfile', 'wb') as fp:
+#     pickle.dump(tasks, fp)
